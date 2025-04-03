@@ -22,7 +22,7 @@ engine = create_engine(DATABASE_URL,
                        #verifica que la conexion este activa
                        pool_pre_ping=True,
                        #muestra el resultado sql en consola
-                       echo=True
+                    #    echo=True
 )
 
 SessionLocal = sessionmaker(

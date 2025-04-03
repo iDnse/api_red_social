@@ -1,58 +1,36 @@
-from sqlalchemy import Column, Integer, String, Boolean
-from sqlalchemy.orm import Mapped, mapped_column
-from datetime import datetime
+# "cod_cat_aco"	"integer"	"NO"		32
+# "nom_cat_aco"	"character varying"	"NO"	75	
+# "est_cat_aco"	"character"	"NO"	1	
+
+from sqlalchemy import Column, Integer, String, Enum
 from app.database.database import Base
+import enum
 
-"""
-Modelo de categoría de acontecimientos.
+class Estado(enum.Enum):
+    A = "Activo"
+    I = "Inactivo"
 
-Attributes:
-    cod_cat_aco: Código único de la categoría (PK)
-    nom_cat_aco: Nombre de la categoría
-    est_cat_aco: Estado de la categoría (activo/inactivo)
-    fecha_creacion: Fecha de creación del registro
-    fecha_actualizacion: Fecha de última actualización
-"""
 class CategoriaAcontecimiento(Base):
     __tablename__ = "categoria_acontecimiento"
-    __table_args__ = (
-        {"schema": "general"},
-        {"comment": "Tabla que almacena las categorías de acontecimientos"}
-    )
+    __table_args__ = {'schema': 'general'}
 
-    # Columnas principales
-    cod_cat_aco: Mapped[int] = mapped_column(
-        Integer, 
+    cod_cat_aco = Column(
+        Integer,
         primary_key=True,
         index=True,
-        comment="Código único de la categoría"
-    )
-    
-    nom_cat_aco: Mapped[str] = mapped_column(
-        String(100),
-        nullable=False,
-        unique=True,
-        comment="Nombre descriptivo de la categoría"
-    )
-    
-    est_cat_aco: Mapped[str] = mapped_column(
-        String(1),
-        nullable=False,
-        default="A",
-        comment="Estado: A=Activo, I=Inactivo"
-    )
-    
-    # Metadatos adicionales
-    fecha_creacion: Mapped[datetime] = mapped_column(
-        default=datetime.utcnow,
-        comment="Fecha de creación del registro"
-    )
-    
-    fecha_actualizacion: Mapped[datetime] = mapped_column(
-        default=datetime.utcnow,
-        onupdate=datetime.utcnow,
-        comment="Fecha de última actualización"
+        unique= True,
+        nullable=True
     )
 
-    def __repr__(self) -> str:
-        return f"<CategoriaAcontecimiento(cod={self.cod_cat_aco}, nombre={self.nom_cat_aco})>"
+    nom_cat_aco = Column(
+        String(75),
+        index=True,
+        unique=True,
+        nullable=False
+    )
+
+    est_cat_aco = Column(
+        Enum(Estado),
+        nullable=False,
+        default=Estado.A
+    )
