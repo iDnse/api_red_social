@@ -17,4 +17,4 @@ class CategoriaAcontecimientoUpdate(CategoriaAcontecimientoBase):
 class CategoriaAcontecimientoResponse(CategoriaAcontecimientoBase):
     cod_cat_aco : int
     class Config: 
-        from_attributes = True
+        from_attributes : True
