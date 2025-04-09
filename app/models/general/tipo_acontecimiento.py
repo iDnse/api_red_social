@@ -6,6 +6,7 @@
 from sqlalchemy import Column, String, Integer, ForeignKey, Enum
 from app.database.database import Base
 import enum
+from app.models.general.categoria_acontecimiento import CategoriaAcontecimiento
 
 class Estado(enum.Enum):
     A = "Activo"
@@ -29,7 +30,7 @@ class TipoAcontecimiento(Base):
 
     fky_cat_aco = Column(
         Integer,
-        ForeignKey("general.categoria_acontecimiento.cod_cat_aco"),
+        ForeignKey(CategoriaAcontecimiento.cod_cat_aco),
         nullable = False
     )
 
