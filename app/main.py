@@ -7,6 +7,7 @@ from app.routes.perfil_personal.persona import router as persona
 from app.routes.perfil_personal.contacto import router as contacto_persona
 from app.routes.perfil_personal.multimedia import router as multimedia_persona
 from app.routes.perfil_personal.publicacion import router as publicacion_persona
+from app.routes.perfil_personal.solicitud import router as solicitud_persona
 
 Base.metadata.create_all(bind=engine)
 
@@ -22,3 +23,4 @@ app.include_router(persona, prefix="/persona", tags=["Persona"])
 app.include_router(contacto_persona, prefix="/contacto_persona", tags=["ContactoPersona"])
 app.include_router(multimedia_persona, prefix="/multimedia_persona", tags=["MultimediaPersona"])
 app.include_router(publicacion_persona, prefix="/publicacion_persona", tags=["PublicacionPersona"])
+app.include_router(solicitud_persona, prefix="/solicitud_persona", tags=["SolicitudPersona"])
